@@ -1,0 +1,71 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Create discount code{% endblock %}
+
+{% block body %}
+    <section style="margin-top:20px;">
+        <article style="align-items: center;">
+            <div style="margin-right:20px;">
+                <a href="/app" class="button text-white secondary icon-prev" style="display: inline-flex;justify-content: center;align-items: center;"></a>
+            </div>
+            <h1 style="margin-bottom: 0">Create discount code</h1>
+        </article>
+    </section>
+    <section style="margin-bottom:20px;">
+    </section>
+
+    {{ form_start(form) }}
+    <section>
+        <div class="card has-sections">
+            <div class="card-section">
+                <div class="row">
+                    <label for="name">Discount code</label>
+                    {{ form_widget(form.name) }}
+                    <em>Customers will enter this discount code at checkout.</em>
+                </div>
+            </div>
+        </div>
+    </section>
+    <section>
+        <div class="card has-sections">
+            <div class="card-section">
+                <h5>Type</h5>
+                <div class="row">
+                    {% for key, item in form.type.children %}
+                    <label>
+                        {{ form_widget(item) }}
+                        {{item.vars.label}}
+                    </label>
+                    {% endfor %}
+                </div>
+            </div>
+        </div>
+    </section>
+    <section>
+        <div class="card has-sections">
+            <div class="card-section">
+                <h5>Value</h5>
+                <div class="input-group">
+                    <label>
+                        {{ form_widget(form.value) }}
+                    </label>
+                    <span class="append value-suffix">%</span>
+                </div>
+            </div>
+        </div>
+    </section>
+    <section>
+        <div class="card has-sections">
+            <div class="card-section">
+                <h5>Usage limit</h5>
+                <div class="row">
+                    <label>{{ form_widget(form.once_per_customer) }} {{ form.once_per_customer.vars.label }}</label>
+                </div>
+            </div>
+        </div>
+    </section>
+    <section>
+        {{ form_widget(form.save) }}
+    </section>
+    {{ form_end(form) }}
+{% endblock %}

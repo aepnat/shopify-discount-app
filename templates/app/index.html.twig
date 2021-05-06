@@ -1,0 +1,42 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}App Dashboard{% endblock %}
+
+{% block body %}
+    {% if discountCodes|length %}
+        <section style="margin-top:20px;">
+            <h1>Discount codes</h1>
+        </section>
+        <section>
+            <a href="/app/new" class="button" style="margin-bottom:20px;">Create discount code</a>
+        </section>
+        <section>
+            <table class="full-width">
+                <thead>
+                <tr>
+                    <th>Code</th>
+                    <th>Type</th>
+                    <th>Value</th>
+                </tr>
+                </thead>
+                <tbody>
+                {% for discountCode in discountCodes %}
+                    <tr>
+                        <td>{{ discountCode.name }}</td>
+                        <td><span class="tag {{ discountCode.type == "PERCENTAGE" ? 'yellow' : 'orange' }}">{{ discountCode.type }}</span></td>
+                        <td>{{ discountCode.getValueFormatted() }}</td>
+                    </tr>
+                {% endfor %}
+                </tbody>
+            </table>
+        </section>
+    {% else %}
+        <section class="zero-state full-width">
+            <article>
+                <h1>Discount codes</h1>
+                <p>Create discount codes and automatic discounts that apply at checkout. </p>
+                <a href="/app/new" class="button">Create discount code</a>
+            </article>
+        </section>
+    {% endif %}
+{% endblock %}
